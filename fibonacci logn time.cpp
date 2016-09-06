@@ -22,6 +22,6 @@ int main(){
 	int unit[2][2]={{1,1},{1,0}};
 	int answer[2][2]={{1,1},{1,0}};
 	int n=4;
-	fibonacci(answer,unit,n);
+	fibonacci(answer,unit,2);
 	cout<<answer[0][0]<<" "<<answer[0][1]<<endl<<answer[1][0]<<" "<<answer[1][1]<<endl;
 }

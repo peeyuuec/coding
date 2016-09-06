@@ -52,12 +52,13 @@ int main(){
 		for(int i=0;i<=n;i++){
 		sum+=arr[i];
 	}
-	if(sum%2==0)sum=sum/2;
-	else{sum=(sum-1)/2;
+	int half;
+	if(sum%2==0)half=sum/2;
+	else{half=(sum-1)/2;
 	}
-	cout<<sum<<endl;
-	for(int diff=0;diff<=sum;diff++){
-		if(a[n][sum-diff]==1||a[n][sum+diff]==1){
+	cout<<half<<endl;
+	for(int diff=0;diff<=half;diff++){
+		if(a[n][half-diff]==1||a[n][half+diff]==1){
 			cout<<diff;
 			return 1;
 		}
