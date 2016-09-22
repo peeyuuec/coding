@@ -190,16 +190,57 @@ class Graph{
 		
 		
 	}
+	
+	int topologicallistutil(int start,int V,int stack[],int top,int visited[]){
+		visited[start]=1;
+		
+		list<int>::iterator it;
+		for(it=adj[start].begin();it!=adj[start].end();it++){
+			if(visited[*it]==0){
+				topologicallistutil(*it,V,stack,top,visited);
+			}
+		}
+		stack[++top]=start;
+	}
+	void topologicallist(int V,int stack[],int &top){
+		int visited[V];
+		for(int i=0;i<V;i++){
+			visited[i]=0;
+		}
+		for(int i=0;i<V;i++){
+			topologicallistutil(i,V,stack,top,visited);
+		}
+		for(int i=0;i<=top;i++){
+			cout<<stack[i]<<" ";
+		}
+	}
+	void shortestpathutil(int V,int visited[],int start,int length,int &max){
+		int stack[V];
+		int top=-1;
+		topologicallist(V,stack,top);
+	}
+	void shortestlength(int V){
+		int visited[V];
+		for(int i=0;i<V;i++){
+			visited[i]=0;
+		}
+		int len=0;
+		int max=0;
+		shortestpathutil(V,visited,0,len,max);
+	}
 };
 int main(){
 	int V=6;
 	Graph g(V);
- g.addEdge(5, 2);
-    g.addEdge(5, 0);
-    g.addEdge(4, 0);
-    g.addEdge(4, 1);
-    g.addEdge(2, 3);
-    g.addEdge(3, 1);
+ 	g.addEdge(0, 1, 5);
+    g.addEdge(0, 2, 3);
+    g.addEdge(1, 3, 6);
+    g.addEdge(1, 2, 2);
+    g.addEdge(2, 4, 4);
+    g.addEdge(2, 5, 2);
+    g.addEdge(2, 3, 7);
+    g.addEdge(3, 4, -1);
+    g.addEdge(4, 5, -2);
     g.BFS(2,V);
     cout<<endl;
     g.DFS(2,V);
@@ -209,4 +250,6 @@ int main(){
     g.topological_sorting(V);
     cout<<endl;
     g.checkBipartite(V);
+    cout<<endl;
+    g.shortestlength(V);
 }
